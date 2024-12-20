@@ -6,7 +6,10 @@ import java.time.LocalDate
 @Component
 class UserDaoService {
 
-    companion object {
+    fun getUsers() = USERS
+    fun findUserById(id: Int) = USERS.find { it.id == id }
+
+    private companion object {
         val USERS = listOf(
             User(1, "Milo", LocalDate.now().minusYears(100)),
             User(2, "Shun", LocalDate.now().minusYears(1000)),
