@@ -15,7 +15,13 @@ class UserResource(
     fun retrieveAllUsers() = userDaoService.getUsers()
 
     @GetMapping(path= ["/users/{id}"])
-    fun retrieveUser(@PathVariable id: Int) = userDaoService.findUserById(id)
+    fun retrieveUser(@PathVariable id: Int): User {
+        userDaoService.findUserById(id)?.let {
+            return it
+        } ?: run{
+            throw UserNotFoundException()
+        }
+    }
 
     @PostMapping(path= ["/users"])
     fun createUser(@RequestBody user: User): ResponseEntity<User>{
