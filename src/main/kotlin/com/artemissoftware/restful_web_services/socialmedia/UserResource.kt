@@ -2,7 +2,8 @@ package com.artemissoftware.restful_web_services.socialmedia
 
 import com.artemissoftware.restful_web_services.socialmedia.exception.UserNotFoundException
 import jakarta.validation.Valid
-import org.springframework.http.MediaType
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -18,9 +19,13 @@ class UserResource(
     fun retrieveAllUsers() = userDaoService.getUsers()
 
     @GetMapping(path= ["/users/{id}"])
-    fun retrieveUser(@PathVariable id: Int): User {
+    fun retrieveUser(@PathVariable id: Int): EntityModel<User> {
         userDaoService.findUserById(id)?.let {
-            return it
+            val link = linkTo(methodOn(this.javaClass).retrieveAllUsers())
+            val entityModel = EntityModel.of<User>(it)
+            entityModel.add(link.withRel("all-users"));
+
+            return entityModel
         } ?: run {
             throw UserNotFoundException("id: $id")
         }
