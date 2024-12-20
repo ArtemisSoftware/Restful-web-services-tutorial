@@ -16,6 +16,8 @@ class UserDaoService {
         return user.id
     }
 
+    fun delete(id: Int) = USERS.removeIf{ it.id == id }
+
     private companion object {
         val USERS = mutableListOf(
             User(1, "Milo", LocalDate.now().minusYears(100)),

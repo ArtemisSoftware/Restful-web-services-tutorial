@@ -35,4 +35,9 @@ class UserResource(
 
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping(path= ["/users/{id}"])
+    fun deleteUser(@PathVariable id: Int) = userDaoService.delete(id)
+
+
 }
