@@ -1,5 +1,6 @@
 package com.artemissoftware.restful_web_services.socialmedia
 
+import com.artemissoftware.restful_web_services.socialmedia.exception.UserNotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -18,8 +19,8 @@ class UserResource(
     fun retrieveUser(@PathVariable id: Int): User {
         userDaoService.findUserById(id)?.let {
             return it
-        } ?: run{
-            throw UserNotFoundException()
+        } ?: run {
+            throw UserNotFoundException("id: $id")
         }
     }
 

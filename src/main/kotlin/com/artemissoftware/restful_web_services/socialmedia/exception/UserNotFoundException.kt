@@ -1,4 +1,4 @@
-package com.artemissoftware.restful_web_services.socialmedia
+package com.artemissoftware.restful_web_services.socialmedia.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
