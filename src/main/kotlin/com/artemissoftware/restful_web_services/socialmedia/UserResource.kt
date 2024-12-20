@@ -2,6 +2,7 @@ package com.artemissoftware.restful_web_services.socialmedia
 
 import com.artemissoftware.restful_web_services.socialmedia.exception.UserNotFoundException
 import jakarta.validation.Valid
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
