@@ -8,9 +8,13 @@ class UserDaoService {
 
     fun getUsers() = USERS
     fun findUserById(id: Int) = USERS.find { it.id == id }
+    fun saveUser(user: User) {
+        user.id = USERS.last().id + 1
+        USERS.add(user)
+    }
 
     private companion object {
-        val USERS = listOf(
+        val USERS = mutableListOf(
             User(1, "Milo", LocalDate.now().minusYears(100)),
             User(2, "Shun", LocalDate.now().minusYears(1000)),
         )
