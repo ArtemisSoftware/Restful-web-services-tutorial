@@ -13,41 +13,33 @@ import java.util.*
 class FilteringController {
 
     @GetMapping("/filtering") //field2
-    fun filtering(): SomeBean {
+    fun filtering(): MappingJacksonValue {
         val someBean = SomeBean("value1", "value2", "value3")
 
-//        val mappingJacksonValue = MappingJacksonValue(someBean)
-//
-//        val filter =
-//            SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field3")
-//
-//        val filters: FilterProvider =
-//            SimpleFilterProvider().addFilter("SomeBeanFilter", filter)
-//
-//        mappingJacksonValue.filters = filters
-//
-//
-//        return mappingJacksonValue
-        return someBean
+        val mappingJacksonValue = MappingJacksonValue(someBean)
+        val filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field3")
+        val filters = SimpleFilterProvider().addFilter("SomeBeanFilter", filter)
+        mappingJacksonValue.filters = filters
+
+        return mappingJacksonValue
     }
 
     @GetMapping("/filtering-list") //field2, field3
-    fun filteringList(): List<SomeBean> {
+    fun filteringList(): MappingJacksonValue {
         val list =  listOf(
             SomeBean("value1", "value2", "value3"),
             SomeBean("value4", "value5", "value6")
         )
-//        val mappingJacksonValue = MappingJacksonValue(list)
-//
-//        val filter =
-//            SimpleBeanPropertyFilter.filterOutAllExcept("field2", "field3")
-//
-//        val filters: FilterProvider =
-//            SimpleFilterProvider().addFilter("SomeBeanFilter", filter)
-//
-//        mappingJacksonValue.filters = filters
+        val mappingJacksonValue = MappingJacksonValue(list)
 
+        val filter =
+            SimpleBeanPropertyFilter.filterOutAllExcept("field2", "field3")
 
-        return list
+        val filters: FilterProvider =
+            SimpleFilterProvider().addFilter("SomeBeanFilter", filter)
+
+        mappingJacksonValue.filters = filters
+        return mappingJacksonValue
+
     }
 }

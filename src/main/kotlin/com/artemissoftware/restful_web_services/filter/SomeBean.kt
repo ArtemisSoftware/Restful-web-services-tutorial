@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 
 //@JsonIgnoreProperties(*["field1", "field2"])
-//@JsonFilter("SomeBeanFilter")
+@JsonFilter("SomeBeanFilter")
 data class SomeBean(
     val field1: String,
-    @field:JsonIgnore
+    //@field:JsonIgnore
     val field2: String,
     var field3: String
 )
