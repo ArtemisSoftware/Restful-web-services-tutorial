@@ -8,9 +8,10 @@ class UserDaoService {
 
     fun getUsers() = USERS
     fun findUserById(id: Int) = USERS.find { it.id == id }
-    fun saveUser(user: User) {
+    fun save(user: User): Int {
         user.id = USERS.last().id + 1
         USERS.add(user)
+        return user.id
     }
 
     private companion object {
