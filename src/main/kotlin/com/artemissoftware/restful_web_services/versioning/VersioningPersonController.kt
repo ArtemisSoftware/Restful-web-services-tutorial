@@ -12,27 +12,22 @@ class VersioningPersonController {
     @GetMapping("/v2/person")
     fun getSecondVersionOfPerson() = PersonV2(Name("Bob", "Charlie"))
 
-//    @get:GetMapping(path = ["/person"], params = ["version=1"])
-//    val firstVersionOfPersonRequestParameter: PersonV1
-//        get() = PersonV1("Bob Charlie")
-//
-//    @get:GetMapping(path = ["/person"], params = ["version=2"])
-//    val secondVersionOfPersonRequestParameter: PersonV2
-//        get() = PersonV2(Name("Bob", "Charlie"))
-//
-//    @get:GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=1"])
-//    val firstVersionOfPersonRequestHeader: PersonV1
-//        get() = PersonV1("Bob Charlie")
-//
-//    @get:GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=2"])
-//    val secondVersionOfPersonRequestHeader: PersonV2
-//        get() = PersonV2(Name("Bob", "Charlie"))
-//
-//    @get:GetMapping(path = ["/person/accept"], produces = ["application/vnd.company.app-v1+json"])
-//    val firstVersionOfPersonAcceptHeader: PersonV1
-//        get() = PersonV1("Bob Charlie")
-//
-//    @get:GetMapping(path = ["/person/accept"], produces = ["application/vnd.company.app-v2+json"])
-//    val secondVersionOfPersonAcceptHeader: PersonV2
-//        get() = PersonV2(Name("Bob", "Charlie"))
+    @GetMapping(path = ["/person"], params = ["version=1"])
+    fun getFirstVersionOfPersonRequestParameter()= PersonV1("Bob Charlie")
+
+    @GetMapping(path = ["/person"], params = ["version=2"])
+    fun getSecondVersionOfPersonRequestParameter()= PersonV2(Name("Bob", "Charlie"))
+
+    @GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=1"])
+    fun getFirstVersionOfPersonRequestHeader() = PersonV1("Bob Charlie")
+
+    @GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=2"])
+    fun getSecondVersionOfPersonRequestHeader() = PersonV2(Name("Bob", "Charlie"))
+
+    @GetMapping(path = ["/person/accept"], produces = ["application/vnd.company.app-v1+json"])
+    fun getFirstVersionOfPersonAcceptHeader() = PersonV1("Bob Charlie")
+
+    @GetMapping(path = ["/person/accept"], produces = ["application/vnd.company.app-v2+json"])
+    fun getSecondVersionOfPersonAcceptHeader() = PersonV2(Name("Bob", "Charlie"))
+
 }
