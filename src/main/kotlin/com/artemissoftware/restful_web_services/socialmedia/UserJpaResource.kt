@@ -12,7 +12,8 @@ import java.net.URI
 
 @RestController
 class UserJpaResource(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val postRepository: PostRepository
 ) {
 
     @GetMapping(path= ["/jpa/users"])
@@ -53,5 +54,23 @@ class UserJpaResource(
         if (user.isEmpty) throw UserNotFoundException("id:$id")
 
         return user.get().posts
+    }
+
+    @PostMapping("/jpa/users/{id}/posts")
+    fun createPostForUser(@PathVariable id: Int,  @Valid @RequestBody post: Post): ResponseEntity<User> {
+        val user = userRepository.findById(id)
+
+        if (user.isEmpty) throw UserNotFoundException("id:$id")
+
+        post.user = user.get()
+
+        val savedPost = postRepository.save(post)
+
+        val location = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(savedPost.id)
+            .toUri()
+
+        return ResponseEntity.created(location).build()
     }
 }

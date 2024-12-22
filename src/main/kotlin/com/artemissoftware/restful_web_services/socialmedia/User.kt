@@ -16,8 +16,8 @@ data class User(
     @Id
     @Generated
     var id: Int,
-    @field:Size(min = 2, max = 19, message = "Must have a minimum of 2 characters")
 
+    @field:Size(min = 2, max = 19, message = "Must have a minimum of 2 characters")
     @JsonProperty("user_name")
     var name: String ="",
 
