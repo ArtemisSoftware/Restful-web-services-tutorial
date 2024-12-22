@@ -2,7 +2,6 @@ package com.artemissoftware.restful_web_services.socialmedia
 
 import com.artemissoftware.restful_web_services.socialmedia.exception.UserNotFoundException
 import jakarta.validation.Valid
-import org.springframework.data.jpa.domain.AbstractPersistable_
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*
 import org.springframework.http.ResponseEntity
@@ -47,5 +46,12 @@ class UserJpaResource(
     @DeleteMapping(path= ["/jpa/users/{id}"])
     fun deleteUser(@PathVariable id: Int) = userRepository.deleteById(id)
 
+    @GetMapping("/jpa/users/{id}/posts")
+    fun retrievePostsForUser(@PathVariable id: Int): List<Post> {
+        val user = userRepository.findById(id)
 
+        if (user.isEmpty) throw UserNotFoundException("id:$id")
+
+        return user.get().posts
+    }
 }
